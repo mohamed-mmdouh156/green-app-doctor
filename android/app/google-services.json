@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904370798699",
+    "firebase_url": "https://greendoctorlastversion-default-rtdb.firebaseio.com",
+    "project_id": "greendoctorlastversion",
+    "storage_bucket": "greendoctorlastversion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904370798699:android:8ccc855b28e16cd984f12e",
+        "android_client_info": {
+          "package_name": "com.example.greenappdoctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904370798699-2uol1pgklsgm074oqod0raalnj47emr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.greenappdoctor",
+            "certificate_hash": "6fb13337bb1a9939ae8e23e1a13ea0abb45fb000"
+          }
+        },
+        {
+          "client_id": "904370798699-k23ppdf5rumbk8mlp0vq63rgq6mi4dio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9n2LjXI9j1X0KwTwoJhJpBZkQFzXfk8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904370798699-k23ppdf5rumbk8mlp0vq63rgq6mi4dio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
