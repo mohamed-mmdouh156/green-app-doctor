@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:greenappdoctor/shared/shared_preferences/cash_helper.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -28,10 +29,10 @@ class MainDrawer extends StatelessWidget {
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 55,
                       backgroundImage:
-                          AssetImage("lib/shared/styles/images/profile.jpg"),
+                          NetworkImage(CashHelper.getData(key: 'userImage')),
                     ),
                     IconButton(
                         onPressed: () {},
@@ -45,7 +46,7 @@ class MainDrawer extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.all(15),
                   child: Text(
-                    getUser(),
+                    CashHelper.getData(key: 'userName'),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(

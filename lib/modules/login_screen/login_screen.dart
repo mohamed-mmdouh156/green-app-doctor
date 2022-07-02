@@ -234,6 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             print(value['email']);
                             print(value['name']);
                             print(value['phone']);
+                            CashHelper.saveData(key: 'userImage',value: value['image']);
                             CashHelper.saveData(key: 'userEmail',value: value['email']);
                             CashHelper.saveData(key: 'userName',value: value['name']);
                             CashHelper.saveData(key: 'userPhone',value: value['phone']);

@@ -53,3 +53,8 @@ class GetFruitsItemErrorState extends AppState {
 class GetUserSuccessState extends AppState {}
 
 class GetUserErrorState extends AppState {}
+
+
+class UploadProfileImageSuccessState extends AppState {}
+
+class UploadProfileImageErrorState extends AppState {}

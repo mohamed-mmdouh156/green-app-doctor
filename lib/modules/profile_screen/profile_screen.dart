@@ -1,6 +1,11 @@
 import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:greenappdoctor/model/plant_user_model/plant_user_model.dart';
+import 'package:greenappdoctor/shared/components/components.dart';
+import 'package:greenappdoctor/shared/shared_preferences/cash_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../layouts/homePageLayout/cubit_cubit.dart';
@@ -8,8 +13,9 @@ import '../../layouts/homePageLayout/cubit_cubit.dart';
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
-  var nameController = TextEditingController();
-  var phoneController = TextEditingController();
+
+
+
 
 
   @override
@@ -17,25 +23,29 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final ImagePicker imagePicker = ImagePicker();
-  File? pickedImages;
-  fetchImage() async {
-    final XFile? image =
-        await imagePicker.pickImage(source: ImageSource.gallery);
 
-    if (ImagePicker == null) {
-      return;
-    } else if (ImagePicker != null) {
-      setState(() {
-        pickedImages = File(image!.path);
-      });
-    }
-  }
+
+
+
+  // final ImagePicker imagePicker = ImagePicker();
+  // File? pickedImages;
+  // fetchImage() async {
+  //   final XFile? image =
+  //       await imagePicker.pickImage(source: ImageSource.gallery);
+  //
+  //   if (ImagePicker == null) {
+  //     return;
+  //   } else if (ImagePicker != null) {
+  //     setState(() {
+  //       pickedImages = File(image!.path);
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => AppCubit(),
+  create: (context) => AppCubit()..getUser(),
   child: BlocConsumer<AppCubit, AppState>(
   listener: (context, state) {
     // TODO: implement listener
@@ -96,14 +106,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: SizedBox(
                             width: 200,
                             child: ClipOval(
-                              child: pickedImages == null
-                                  ? null
-                                  : Image.file(pickedImages!, fit: BoxFit.fill),
+                              child: AppCubit.get(context).profileImage == null
+                                  ? Image(image: NetworkImage(CashHelper.getData(key: 'userImage')))
+                                  : Image.file(AppCubit.get(context).profileImage!, fit: BoxFit.fill),
                             ),
                           ),
                         ),
                         IconButton(
-                          onPressed: fetchImage,
+                          onPressed: (){
+                            AppCubit.get(context).getProfileImage();
+                          },
                           icon: const Icon(
                             Icons.camera_alt,
                             color: Color(0xff255E3A),
@@ -130,29 +142,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Color(0xff416F46), fontFamily: 'Courgette'),
                       ),
                       textAlign: TextAlign.start,
+                      controller: AppCubit.get(context).nameController,
                       keyboardType: TextInputType.name,
                     ),
                   ),
                   const SizedBox(),
-                  Container(
-                    height: 40,
-                    margin: const EdgeInsets.all(16),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        prefixIcon: const Icon(
-                          Icons.lock_rounded,
-                          color: Color(0xff416F46),
-                        ),
-                        labelText: "Edit Password",
-                        labelStyle: const TextStyle(
-                            color: Color(0xff416F46), fontFamily: 'Courgette'),
-                      ),
-                      textAlign: TextAlign.start,
-                      keyboardType: TextInputType.name,
-                    ),
-                  ),
                   Container(
                     height: 40,
                     margin: const EdgeInsets.all(16),
@@ -169,7 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Color(0xff416F46), fontFamily: 'Courgette'),
                       ),
                       textAlign: TextAlign.start,
-                      keyboardType: TextInputType.name,
+                      controller: AppCubit.get(context).phoneController,
+                      keyboardType: TextInputType.phone,
                     ),
                   ),
                   Container(
@@ -182,7 +177,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             primary: const Color(0xff255E3A),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {},
+                        onPressed: () {
+
+                           setState((){
+                             AppCubit.get(context).uploadUserImage().then((value) {});
+                           });
+
+                        },
                         child: const Text("Save",
                             style: TextStyle(
                                 fontSize: 25,
@@ -190,8 +191,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontFamily: 'Courgette'))),
                   ),
                 ]))));
-  },
-),
-);
-  
-}}
+            },
+          ),
+          );
+
+          }}
