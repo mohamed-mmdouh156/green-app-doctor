@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:greenappdoctor/shared/components/components.dart';
 import 'package:meta/meta.dart';
 
 import '../../model/data_model/data_model.dart';
@@ -55,7 +56,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
 
-  getFruitsItem(String dccId) {
+  void getFruitsItem(String dccId) {
     FirebaseFirestore.instance.collection('fruits').get().then((value) {
       value.docs.forEach((element) {
         fruitItem.add(DataModel.fromjson(element.data()));
@@ -66,4 +67,18 @@ class AppCubit extends Cubit<AppState> {
       emit(GetFruitsItemErrorState(error.toString()));
     });
   }
+
+  // void getUser() {
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(uId).get()
+  //       .then((value) {
+  //     print(value['email']);
+  //     emit(GetUserSuccessState());
+  //   }).catchError((error) {
+  //     print('Error is ${error.toString()}');
+  //     emit(GetUserErrorState());
+  //
+  //   });
+  // }
 }

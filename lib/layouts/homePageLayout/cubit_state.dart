@@ -49,3 +49,7 @@ class GetFruitsItemErrorState extends AppState {
   final String error ;
   GetFruitsItemErrorState(this.error);
 }
+
+class GetUserSuccessState extends AppState {}
+
+class GetUserErrorState extends AppState {}

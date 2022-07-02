@@ -1,6 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:greenappdoctor/layouts/homePageLayout/cubit_cubit.dart';
+import 'package:greenappdoctor/shared/shared_preferences/cash_helper.dart';
 
 import '../../shared/components/components.dart';
 
@@ -24,6 +27,16 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formkey.currentState!.validate()) {
       formDate?.save();
       try {
+         FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password).then((value) {
+           uId = value.user!.uid;
+           print('siiiiiiiiiiiiiiiiiiiiiiiiiii');
+           print(uId);
+           print('siiiiiiiiiiiiiiiiiiiiiiiiiii');
+           CashHelper.saveData(key: 'uId',value: uId!);
+           print(CashHelper.getData(key: 'uId'));
+
+        });
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
         return userCredential;
@@ -214,7 +227,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: 'Login successfully',
                         desc: "welcome to our Green Doctor App",
                         btnOkOnPress: () {
-                          Navigator.pushReplacementNamed(context, 'HomePageLayout');
+                          FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(uId).get()
+                              .then((value) {
+                            print(value['email']);
+                            print(value['name']);
+                            print(value['phone']);
+                            CashHelper.saveData(key: 'userEmail',value: value['email']);
+                            CashHelper.saveData(key: 'userName',value: value['name']);
+                            CashHelper.saveData(key: 'userPhone',value: value['phone']);
+
+                            Navigator.pushReplacementNamed(context, 'HomePageLayout');
+                          }).catchError((error) {
+                            print('Error is ${error.toString()}');
+                          });
                         },
                       ).show();
                     }

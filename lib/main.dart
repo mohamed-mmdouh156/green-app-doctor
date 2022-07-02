@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:greenappdoctor/shared/shared_preferences/cash_helper.dart';
 import 'layouts/homePageLayout/homepagelayout.dart';
 import 'modules/caring_screen/caring_screen.dart';
 import 'modules/decoration_plants_collection_screen/decoration_plants_screen.dart';
@@ -21,6 +22,7 @@ bool islogin = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CashHelper.init();
   await Firebase.initializeApp();
   var user = FirebaseAuth.instance.currentUser;
   if (user == null) {
