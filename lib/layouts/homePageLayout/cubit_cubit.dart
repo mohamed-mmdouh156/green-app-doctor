@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:greenappdoctor/model/disease_model/disease_model.dart';
 import 'package:greenappdoctor/model/plant_user_model/plant_user_model.dart';
 import 'package:greenappdoctor/shared/components/components.dart';
 import 'package:greenappdoctor/shared/shared_preferences/cash_helper.dart';
@@ -23,6 +24,7 @@ class AppCubit extends Cubit<AppState> {
   List<DataModel> decorationPlants = [];
   List<String> fruitsId = [];
   List<DataModel> fruitItem = [];
+  
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
 
@@ -148,6 +150,27 @@ class AppCubit extends Cubit<AppState> {
 
 
     });
+  }
+
+  List<DiseaseModel> disease=[];
+
+  DiseaseModel? diseaseModel;
+  void getDiseases(){
+
+    FirebaseFirestore.instance.collection('Diseases').get().then((value) {
+
+      value.docs.forEach((element) {
+         disease.add(
+             DiseaseModel.fromjson(element.data())
+         );
+         print(disease.length);
+      });
+      emit(GetDiseasesSuccessState());
+    }).catchError((error){
+      print('Error is ${error.toString()}');
+      emit(GetDiseasesErrorState());
+    });
+
   }
 
 }

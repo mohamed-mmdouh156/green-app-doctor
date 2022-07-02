@@ -58,3 +58,7 @@ class GetUserErrorState extends AppState {}
 class UploadProfileImageSuccessState extends AppState {}
 
 class UploadProfileImageErrorState extends AppState {}
+
+class GetDiseasesSuccessState extends AppState {}
+
+class GetDiseasesErrorState extends AppState {}

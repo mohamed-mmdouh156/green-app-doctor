@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:greenappdoctor/model/disease_model/disease_model.dart';
 
 Widget defaultElevatedButton(
     {double width = double.infinity,

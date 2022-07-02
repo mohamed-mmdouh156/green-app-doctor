@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:greenappdoctor/layouts/homePageLayout/cubit_cubit.dart';
 import 'package:greenappdoctor/shared/shared_preferences/cash_helper.dart';
 import 'layouts/homePageLayout/homepagelayout.dart';
 import 'modules/caring_screen/caring_screen.dart';
@@ -38,25 +40,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: islogin == false ? const SplashScreen() : HomePageLayout(),
-      routes: {
-        'SplashScreen': (context) => const SplashScreen(),
-        'IntroScreen': (context) => const IntroScreen(),
-        'LoginScreen': (context) => const LoginScreen(),
-        'SignUpScreen': (context) => const SignUpScreen(),
-        'HomePageLayout': (context) => HomePageLayout(),
-        'CaringScreen': (context) => const CaringScreen(),
-        'FavouritsScreen': (context) => const FavouritsScreen(),
-        'DiagnossScreen': (context) => const DiagnossScreen(),
-        'HomePageScreen': (context) => const HomePageScreen(),
-        'LogoutScreen': (context) => const LogOutScreen(),
-        'ProfileScreen': (context) => ProfileScreen(),
-        'FruitsCollectionScreen': (context) =>  const FruitsCollectionScreen(),
-        'VegetablesCollectionScreen': (context) => const VegetablesCollectionScreen(),
-        'DecorationPlantsCollectionScreen': (context) => const DecorationPlantsCollectionScreen(),
-      },
+    return BlocProvider(
+        create: (context) => AppCubit()..getUser()..getDiseases(),
+        child: BlocConsumer<AppCubit,AppState>(
+          listener: (context,state){
+
+          },
+          builder: (context,state){
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: islogin == false ? const SplashScreen() : HomePageLayout(),
+              routes: {
+                'SplashScreen': (context) => const SplashScreen(),
+                'IntroScreen': (context) => const IntroScreen(),
+                'LoginScreen': (context) => const LoginScreen(),
+                'SignUpScreen': (context) => const SignUpScreen(),
+                'HomePageLayout': (context) => HomePageLayout(),
+                'CaringScreen': (context) => const CaringScreen(),
+                'FavouritsScreen': (context) => const FavouritsScreen(),
+                'DiagnossScreen': (context) => const DiagnossScreen(),
+                'HomePageScreen': (context) => const HomePageScreen(),
+                'LogoutScreen': (context) => const LogOutScreen(),
+                'ProfileScreen': (context) => ProfileScreen(),
+                'FruitsCollectionScreen': (context) =>  const FruitsCollectionScreen(),
+                'VegetablesCollectionScreen': (context) => const VegetablesCollectionScreen(),
+                'DecorationPlantsCollectionScreen': (context) => const DecorationPlantsCollectionScreen(),
+              },
+            );
+          },
+        ),
     );
   }
 }

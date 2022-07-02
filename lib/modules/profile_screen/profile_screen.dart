@@ -44,9 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-  create: (context) => AppCubit()..getUser(),
-  child: BlocConsumer<AppCubit, AppState>(
+    return  BlocConsumer<AppCubit, AppState>(
   listener: (context, state) {
     // TODO: implement listener
   },
@@ -192,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ]))));
             },
-          ),
+
           );
 
           }}

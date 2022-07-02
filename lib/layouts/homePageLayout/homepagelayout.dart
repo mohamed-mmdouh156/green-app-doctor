@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:greenappdoctor/model/disease_model/disease_model.dart';
+import 'package:greenappdoctor/shared/components/components.dart';
 import 'package:pandabar/pandabar.dart';
 
 import '../../modules/caring_screen/caring_screen.dart';
@@ -45,7 +48,9 @@ class _HomePageLayoutState extends State<HomePageLayout> {
         onChange: (id) {
           setState(() {
             page = id;
-          });
+            print(id);
+
+           });
         },
         onFabButtonPressed: () {
           print('done');
