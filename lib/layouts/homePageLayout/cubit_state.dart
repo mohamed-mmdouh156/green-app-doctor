@@ -32,14 +32,6 @@ class GetDecorationPlantsErrorState extends AppState {
   GetDecorationPlantsErrorState(this.error);
 }
 
-class GetFavouritsLoadingState extends AppState {}
-
-class GetFavouritsSuccessState extends AppState {}
-
-class GetFavouritsErrorState extends AppState {
-  final String error ;
-  GetFavouritsErrorState(this.error);
-}
 
 class GetFruitsItemLoadingState extends AppState {}
 
@@ -50,6 +42,21 @@ class GetFruitsItemErrorState extends AppState {
   GetFruitsItemErrorState(this.error);
 }
 
+class AddFavoriteSuccessState extends AppState{}
+class AddFavoriteErrorState extends AppState{}
+
+class GetFavoriteSuccessState extends AppState{}
+class GetFavoriteErrorState extends AppState{}
+
+class AddNoteSuccessState extends AppState{}
+class AddNoteErrorState extends AppState{}
+
+class GetNoteSuccessState extends AppState{}
+class GetNoteErrorState extends AppState{}
+
+class GetModelSuccessState extends AppState{}
+class GetModelErrorState extends AppState{}
+
 class GetUserSuccessState extends AppState {}
 
 class GetUserErrorState extends AppState {}
@@ -58,6 +65,10 @@ class GetUserErrorState extends AppState {}
 class UploadProfileImageSuccessState extends AppState {}
 
 class UploadProfileImageErrorState extends AppState {}
+
+class GetDiseasesSuccessState extends AppState {}
+
+class GetDiseasesErrorState extends AppState {}
 
 class GetDiseasesSuccessState extends AppState {}
 

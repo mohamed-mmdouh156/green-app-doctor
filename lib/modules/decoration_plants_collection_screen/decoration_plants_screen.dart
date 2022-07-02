@@ -109,7 +109,9 @@ class _DecorationPlantsCollectionScreenState
 
 Widget buildDecorationPlantsItem(DataModel model, context) => InkWell(
       splashColor: Colors.teal,
-      onTap: () {},
+  onTap: () {
+    AppCubit.get(context).addFavouriteItem(model);
+  },
       child: Stack(
         children: [
           Container(

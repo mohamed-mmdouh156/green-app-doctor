@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,7 +122,9 @@ class _VegetablesCollectionScreenState extends State<VegetablesCollectionScreen>
 
 Widget buildVegetablesItem(DataModel model, context) => InkWell(
   splashColor: Colors.teal,
-  onTap: () {},
+  onTap: () {
+    AppCubit.get(context).addFavouriteItem(model);
+  },
   child: Stack(
     children: [
       Container(

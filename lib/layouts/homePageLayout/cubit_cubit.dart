@@ -24,7 +24,7 @@ class AppCubit extends Cubit<AppState> {
   List<DataModel> decorationPlants = [];
   List<String> fruitsId = [];
   List<DataModel> fruitItem = [];
-  
+
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
 
@@ -147,30 +147,7 @@ class AppCubit extends Cubit<AppState> {
         print('Error in Upload profileImage ${error.toString()}');
         emit(UploadProfileImageErrorState());
       });
-
-
     });
-  }
-
-  List<DiseaseModel> disease=[];
-
-  DiseaseModel? diseaseModel;
-  void getDiseases(){
-
-    FirebaseFirestore.instance.collection('Diseases').get().then((value) {
-
-      value.docs.forEach((element) {
-         disease.add(
-             DiseaseModel.fromjson(element.data())
-         );
-         print(disease.length);
-      });
-      emit(GetDiseasesSuccessState());
-    }).catchError((error){
-      print('Error is ${error.toString()}');
-      emit(GetDiseasesErrorState());
-    });
-
   }
 
 }

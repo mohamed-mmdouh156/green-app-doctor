@@ -119,7 +119,9 @@ class _FruitsCollectionScreenState extends State<FruitsCollectionScreen> {
 
   Widget buildFruitsItem(DataModel model, context , index) => InkWell(
         splashColor: Colors.teal,
-        onTap: (){},
+    onTap: () {
+      AppCubit.get(context).addFavouriteItem(model);
+    },
         child: Stack(
           children: [
             Container(
